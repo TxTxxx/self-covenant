@@ -43,7 +43,9 @@ npm test
 3. 等待 Deploy to GitHub Pages 工作流成功。
 4. 在 Pages 设置里填写个人域名，并按 GitHub 给出的域名配置说明设置 DNS、启用 HTTPS。
 
-仓库和具体域名尚未配置，当前没有声称已上线。只发布 `public/`，产品文档、设计简报、测试和开发资料不进入站点部署。
+仓库：[TxTxxx/self-covenant](https://github.com/TxTxxx/self-covenant)。
+
+域名：[yue.txtxx.me](https://yue.txtxx.me)。Cloudflare CNAME `yue` → `txtxxx.github.io`，仅 DNS；GitHub Pages 使用 GitHub Actions 发布。只发布 `public/`，产品文档、设计简报、测试和开发资料不进入站点部署。
 
 ## 文件
 

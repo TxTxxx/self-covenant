@@ -18,6 +18,32 @@ const make = (days = 3) =>
     created,
     "Asia/Shanghai",
   );
+test("creation and backup round-trip work without crypto.randomUUID", () => {
+  const original = Object.getOwnPropertyDescriptor(globalThis, "crypto");
+  const getRandomValues = globalThis.crypto.getRandomValues.bind(
+    globalThis.crypto,
+  );
+  Object.defineProperty(globalThis, "crypto", {
+    configurable: true,
+    value: { getRandomValues },
+  });
+  try {
+    const c = make();
+    assert.match(
+      c.id,
+      /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/,
+    );
+    assert.notEqual(c.id, make().id);
+    const saved = freshState();
+    saved.contracts.push(c);
+    const restored = validateState(JSON.parse(JSON.stringify(saved)), created);
+    assert.equal(restored.contracts[0].id, c.id);
+    assert.equal(checkIn(restored.contracts[0], created).checkins.length, 1);
+  } finally {
+    Object.defineProperty(globalThis, "crypto", original);
+  }
+});
+
 test("creation switches to tomorrow exactly at the deadline", () => {
   assert.equal(make().startDate, "2026-09-02");
   const c = createContract(

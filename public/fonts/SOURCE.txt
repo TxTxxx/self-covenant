@@ -1,0 +1,4 @@
+Noto Serif SC, SIL Open Font License.
+Font source: Google Fonts CSS API (Noto Serif SC, UI glyph subset)
+License source: https://raw.githubusercontent.com/notofonts/noto-cjk/main/Serif/LICENSE
+Subset includes application UI Chinese glyphs and Latin letters/digits. User-entered characters outside this subset use the declared local serif fallback.
